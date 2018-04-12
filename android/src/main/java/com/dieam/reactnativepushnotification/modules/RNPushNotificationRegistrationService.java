@@ -30,7 +30,7 @@ public class RNPushNotificationRegistrationService extends IntentService {
         }
     }
 
-    private void sendRegistrationToken(String token) {
+    protected void sendRegistrationToken(String token) {
         Intent intent = new Intent(this.getPackageName() + ".RNPushNotificationRegisteredToken");
         intent.putExtra("token", token);
         sendBroadcast(intent);
