@@ -1,24 +1,26 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.3'
+        classpath 'com.android.tools.build:gradle:3.1.2'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
 apply plugin: 'com.android.library'
 
-def DEFAULT_COMPILE_SDK_VERSION = 26
-def DEFAULT_BUILD_TOOLS_VERSION = "26.0.1"
-def DEFAULT_TARGET_SDK_VERSION = 26
-def DEFAULT_SUPPORT_LIB_VERSION = "26.1.0"
+def DEFAULT_COMPILE_SDK_VERSION = 27
+def DEFAULT_BUILD_TOOLS_VERSION = "27.0.3"
+def DEFAULT_TARGET_SDK_VERSION = 27
+def DEFAULT_SUPPORT_LIB_VERSION = "27.0.0"
 def FIRE_BASE_LIB_VERSION = "12.0.1"
 def GOOGLE_LIB_VERSION = "12.0.1"
 
@@ -48,11 +50,11 @@ dependencies {
     def fireBaseVersion = project.hasProperty('fireBaseVersion') ? project.firebaseVersion : FIRE_BASE_LIB_VERSION
     def googleVersion = project.hasProperty('googleLibVersion') ? project.firebaseVersion : GOOGLE_LIB_VERSION
 
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
-    compile 'com.facebook.react:react-native:+'
-    compile "com.google.android.gms:play-services-gcm:$googleVersion"
-    compile "com.google.firebase:firebase-messaging:$fireBaseVersion"
-    compile 'me.leolin:ShortcutBadger:1.1.8@aar'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation 'com.facebook.react:react-native:+'
+    implementation "com.google.android.gms:play-services-gcm:$googleVersion"
+    implementation "com.google.firebase:firebase-messaging:$fireBaseVersion"
+    implementation 'me.leolin:ShortcutBadger:1.1.8@aar'
 }

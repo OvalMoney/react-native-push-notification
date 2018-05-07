@@ -4,6 +4,7 @@ package com.dieam.reactnativepushnotification.modules;
 import android.app.AlarmManager;
 import android.app.Application;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.dieam.reactnativepushnotification.R;
 import com.facebook.react.bridge.ReadableMap;
 
 import org.json.JSONArray;
@@ -157,12 +159,22 @@ public class RNPushNotificationHelper {
                 title = context.getPackageManager().getApplicationLabel(appInfo).toString();
             }
 
-            NotificationCompat.Builder notification = new NotificationCompat.Builder(context)
+            NotificationCompat.Builder notification = new NotificationCompat.Builder(context, "fcm_default_channel")
                     .setContentTitle(title)
                     .setTicker(bundle.getString("ticker"))
                     .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(bundle.getBoolean("autoCancel", true));
+
+            NotificationManager notificationManager = notificationManager();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel("fcm_default_channel",
+                        "Channel human readable title",
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                if (notificationManager != null) {
+                    notificationManager.createNotificationChannel(channel);
+                }
+            }
 
             String group = bundle.getString("group");
             if (group != null) {
@@ -271,7 +283,7 @@ public class RNPushNotificationHelper {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationID, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            NotificationManager notificationManager = notificationManager();
+
 
             notification.setContentIntent(pendingIntent);
 
