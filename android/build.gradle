@@ -47,8 +47,8 @@ android {
 
 dependencies {
     def supportLibVersion = project.hasProperty('supportLibVersion') ? project.supportLibVersion : DEFAULT_SUPPORT_LIB_VERSION
-    def fireBaseVersion = project.hasProperty('fireBaseVersion') ? project.firebaseVersion : FIRE_BASE_LIB_VERSION
-    def googleVersion = project.hasProperty('googleLibVersion') ? project.firebaseVersion : GOOGLE_LIB_VERSION
+    def fireBaseVersion = project.hasProperty('fireBaseVersion') ? project.fireBaseVersion : FIRE_BASE_LIB_VERSION
+    def googleVersion = project.hasProperty('googleLibVersion') ? project.googleLibVersion : GOOGLE_LIB_VERSION
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
